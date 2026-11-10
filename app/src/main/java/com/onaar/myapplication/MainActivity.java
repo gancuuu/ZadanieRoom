@@ -1,6 +1,8 @@
 package com.onaar.myapplication;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     List<Gra> gryList;
     ArrayAdapter<Gra> arrayAdapter;
+
+    Gra kliknieGra;
 
 
     @Override
@@ -76,6 +80,16 @@ public class MainActivity extends AppCompatActivity {
                 gryList);
 
                 listView.setAdapter(arrayAdapter);
+
+                listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        graDatabase.zwrocGryDao().usunZBazy(gryList.get(position));
+                        gryList.remove(position);
+                        arrayAdapter.notifyDataSetChanged();
+                        return true;
+                    }
+                });
 
     }
 }

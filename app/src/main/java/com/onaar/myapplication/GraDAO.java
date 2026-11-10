@@ -3,6 +3,8 @@ package com.onaar.myapplication;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Delete;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -17,4 +19,10 @@ public interface GraDAO {
 
     @Query("SELECT * FROM gry")
     List<Gra> zwrocWszystkieGry();
+
+    @Delete
+    void usunZBazy(Gra gra);
+
+    @Update
+    void aktualizujGre(Gra gra);
 }

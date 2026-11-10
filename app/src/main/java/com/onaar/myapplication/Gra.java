@@ -23,12 +23,10 @@ public class Gra {
 
     @Override
     public String toString() {
-        return "Gra{" +
-                "id=" + id +
-                ", nazwa='" + nazwa + '\'' +
-                ", producent='" + producent + '\'' +
-                ", rokWydania=" + rokWydania +
-                ", gatunek='" + gatunek + '\'' +
-                '}';
+        return "Gra" +
+                " nazwa=" + nazwa + '\n' +
+                " producent=" + producent + '\n' +
+                " rokWydania=" + rokWydania + '\n' +
+                " gatunek='" + gatunek + '\n' ;
     }
 }
