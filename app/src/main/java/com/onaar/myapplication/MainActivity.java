@@ -1,8 +1,10 @@
 package com.onaar.myapplication;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,12 +13,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     GraDatabase graDatabase;
 
+    ListView listView;
     Button btnDodaj, btnAktualizuj;
     EditText etNazwa, etProducent, etRok, etGatunek;
+
+    List<Gra> gryList;
+    ArrayAdapter<Gra> arrayAdapter;
 
 
     @Override
@@ -37,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
                 btnDodaj = findViewById(R.id.btnAdd);
                 btnAktualizuj = findViewById(R.id.btnUpdate);
-
+                listView = findViewById(R.id.listView);
                 etNazwa = findViewById(R.id.etName);
                 etProducent = findViewById(R.id.etProducer);
-                etRok = findViewById(R.id.etYear);
-                etGatunek = findViewById(R.id.etGenre);
+                etRok = findViewById(R.id.etRok);
+                etGatunek = findViewById(R.id.etGatunek);
 
                 btnDodaj.setOnClickListener(view -> {
 
@@ -53,6 +61,21 @@ public class MainActivity extends AppCompatActivity {
                     );
 
                     graDatabase.zwrocGryDao().wstawGreDoBazy(gra);
+
+                    gryList.clear();
+                    gryList.addAll(graDatabase.zwrocGryDao().zwrocWszystkieGry());
+                    arrayAdapter.notifyDataSetChanged();
+
+
                 });
-            }
-        }
+                gryList = graDatabase.zwrocGryDao().zwrocWszystkieGry();
+
+                arrayAdapter = new ArrayAdapter<>(
+                MainActivity.this,
+                android.R.layout.simple_list_item_1,
+                gryList);
+
+                listView.setAdapter(arrayAdapter);
+
+    }
+}

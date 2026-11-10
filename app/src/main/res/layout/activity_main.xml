@@ -29,14 +29,14 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/etYear"
+        android:id="@+id/etRok"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:hint="Wpisz rok wydania..."
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/etGenre"
+        android:id="@+id/etGatunek"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:hint="Wpisz gatunek gry..."
