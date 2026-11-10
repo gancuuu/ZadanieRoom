@@ -90,6 +90,37 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        kliknieGra = gryList.get(position);
+
+                        etNazwa.setText(kliknieGra.nazwa);
+                        etProducent.setText(kliknieGra.producent);
+                        etRok.setText(""+kliknieGra.rokWydania);
+                        etGatunek.setText(kliknieGra.gatunek);
+
+                        btnAktualizuj.setVisibility(View.VISIBLE);
+                        listView.setItemChecked(position,true);
+                    }
+                });
+
+                btnAktualizuj.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        kliknieGra.nazwa= etNazwa.getText().toString();
+                        kliknieGra.producent = etProducent.getText().toString();
+                        kliknieGra.rokWydania = Integer.parseInt(etRok.getText().toString());
+                        kliknieGra.gatunek = etGatunek.getText().toString();
+
+
+                        graDatabase.zwrocGryDao().aktualizujGre(kliknieGra);
+                        btnAktualizuj.setVisibility(View.INVISIBLE);
+                        listView.clearChoices();
+                        kliknieGra = null;
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+                });
 
     }
 }
